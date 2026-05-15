@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SkillCraft Landing Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    
+
+    header{
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1000;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 8%;
+      background:#0f172a;
+      box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .logo{
+      color:white;
+      font-size:30px;
+      font-weight:700;
+    }
+
+    .menu{
+      display:flex;
+      list-style:none;
+      gap:35px;
+    }
+
+    .menu li a{
+      text-decoration:none;
+      color:white;
+      font-size:17px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .menu li a:hover{
+      color:#00e5ff;
+    }
+
+    .menu li a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background:#00e5ff;
+      transition:0.4s;
+    }
+
+    .menu li a:hover::after{
+      width:100%;
+    }
+
+    .menu-toggle{
+      display:none;
+      color:white;
+      font-size:30px;
+      cursor:pointer;
+    }
+
+
+    section{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      padding:120px 8% 80px;
+      text-align:center;
+    }
+
+    .section-title{
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:48px;
+      margin-bottom:15px;
+      color:#111827;
+    }
+
+    .section-title p{
+      color:#6b7280;
+      font-size:18px;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,#06b6d4,#3b82f6,#6366f1);
+      color:white;
+    }
+
+    .hero h1{
+      font-size:65px;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:22px;
+      margin-bottom:35px;
+    }
+
+    .hero button{
+      padding:15px 35px;
+      border:none;
+      border-radius:50px;
+      background:white;
+      color:#2563eb;
+      font-size:18px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .hero button:hover{
+      transform:translateY(-5px);
+      background:#0f172a;
+      color:white;
+    }
+
+
+    #about{
+      background:#f8fafc;
+    }
+
+    .about-container{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .about-card{
+      background:white;
+      padding:40px 30px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      border-top:5px solid #06b6d4;
+      transition:0.4s;
+    }
+
+    .about-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .about-card h3{
+      font-size:24px;
+      margin-bottom:15px;
+      color:#111827;
+    }
+
+    .about-card p{
+      color:#6b7280;
+      line-height:1.8;
+    }
+
+    #services{
+      background:linear-gradient(135deg,#06b6d4,#2563eb);
+    }
+
+    #services .section-title h2,
+    #services .section-title p{
+      color:white;
+    }
+
+    .services-container{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .service-card{
+      background:white;
+      padding:40px 30px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.15);
+      transition:0.4s;
+    }
+
+    .service-card:hover{
+      transform:translateY(-10px) scale(1.03);
+    }
+
+    .icon{
+      font-size:55px;
+      margin-bottom:20px;
+    }
+
+    .service-card h3{
+      font-size:24px;
+      margin-bottom:15px;
+      color:#111827;
+    }
+
+    .service-card p{
+      color:#6b7280;
+      line-height:1.8;
+    }
+
+
+
+    #contact{
+      background:#f8fafc;
+    }
+
+    .contact-container{
+      width:100%;
+      max-width:700px;
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .contact-form{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      padding:15px;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      font-size:16px;
+      outline:none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+      border-color:#06b6d4;
+      box-shadow:0 0 10px rgba(6,182,212,0.2);
+    }
+
+    .contact-form button{
+      padding:15px;
+      border:none;
+      border-radius:10px;
+      background:#06b6d4;
+      color:white;
+      font-size:18px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .contact-form button:hover{
+      background:#0891b2;
+    }
+
+   
+
+    footer{
+      background:#0f172a;
+      color:white;
+      text-align:center;
+      padding:25px;
+    }
+
+
+
+    @media(max-width:768px){
+
+      .menu{
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:#0f172a;
+        flex-direction:column;
+        align-items:center;
+        padding:25px 0;
+        display:none;
+      }
+
+      .menu.active{
+        display:flex;
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+
+      .hero p{
+        font-size:18px;
+      }
+
+      .section-title h2{
+        font-size:35px;
+      }
+
+      section{
+        min-height:auto;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <header>
+
+    <nav>
+
+      <div class="logo">SkillCraft</div>
+
+      <ul class="menu" id="menu">
+
+        <li><a href="#home">Home</a></li>
+
+        <li><a href="#about">About</a></li>
+
+        <li><a href="#services">Services</a></li>
+
+        <li><a href="#contact">Contact</a></li>
+
+      </ul>
+
+      <div class="menu-toggle" id="menu-toggle">
+        ☰
+      </div>
+
+    </nav>
+
+  </header>
+
+  
+
+  <section class="hero" id="home">
+
+    <h1>Welcome to SkillCraft</h1>
+
+    <p>
+      Responsive Landing Page with Interactive Navigation Menu
+    </p>
+
+    <button>Get Started</button>
+
+  </section>
+
+
+
+  <section id="about">
+
+    <div class="section-title">
+
+      <h2>About Us</h2>
+
+      <p>
+        Learn more about our mission and goals
+      </p>
+
+    </div>
+
+    <div class="about-container">
+
+      <div class="about-card">
+
+        <h3>Creative Learning</h3>
+
+        <p>
+          Learn modern web development with practical projects.
+        </p>
+
+      </div>
+
+      <div class="about-card">
+
+        <h3>Professional Training</h3>
+
+        <p>
+          Internship programs designed to improve coding skills.
+        </p>
+
+      </div>
+
+      <div class="about-card">
+
+        <h3>Career Growth</h3>
+
+        <p>
+          Build your portfolio and prepare for future opportunities.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section id="services">
+
+    <div class="section-title">
+
+      <h2>Our Services</h2>
+
+      <p>
+        What we provide for students and developers
+      </p>
+
+    </div>
+
+    <div class="services-container">
+
+      <div class="service-card">
+
+        <div class="icon">💻</div>
+
+        <h3>Web Development</h3>
+
+        <p>
+          Responsive websites with modern UI and smooth performance.
+        </p>
+
+      </div>
+
+      <div class="service-card">
+
+        <div class="icon">🎨</div>
+
+        <h3>Frontend Design</h3>
+
+        <p>
+          Beautiful and user-friendly interface designs.
+        </p>
+
+      </div>
+
+      <div class="service-card">
+
+        <div class="icon">🚀</div>
+
+        <h3>Internships</h3>
+
+        <p>
+          Hands-on internship experience with real-time projects.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+ 
+
+  <section id="contact">
+
+    <div class="section-title">
+
+      <h2>Contact Us</h2>
+
+      <p>
+        Get in touch with our team
+      </p>
+
+    </div>
+
+    <div class="contact-container">
+
+      <form class="contact-form">
+
+        <input type="text" placeholder="Enter Your Name" required>
+
+        <input type="email" placeholder="Enter Your Email" required>
+
+        <textarea rows="5" placeholder="Enter Your Message"></textarea>
+
+        <button type="submit">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  
+
+  <footer>
+
+    <p>
+      © 2026 SkillCraft Technology | All Rights Reserved
+    </p>
+
+  </footer>
+
+  <script>
+
+    const menu = document.getElementById("menu");
+    const menuToggle = document.getElementById("menu-toggle");
+
+    menuToggle.addEventListener("click", () => {
+
+      menu.classList.toggle("active");
+
+    });
+
+  </script>
+
+</body>
+
+</html>
